@@ -4,11 +4,12 @@ import com.example.flightsystemdemo.passenger.dto.PassengerRequestDto;
 import com.example.flightsystemdemo.passenger.dto.PassengerResponseDto;
 import com.example.flightsystemdemo.passenger.entity.Passenger;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
+@MapperConfig(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 @RequiredArgsConstructor
 @Mapper
+
 public abstract class PassengerMapper {
 
     public abstract Passenger toEntity(PassengerRequestDto dto, @MappingTarget Passenger entity);

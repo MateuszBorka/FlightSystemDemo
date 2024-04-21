@@ -5,8 +5,6 @@ import com.example.flightsystemdemo.passenger.dto.PassengerResponseDto;
 import com.example.flightsystemdemo.passenger.entity.Passenger;
 import com.example.flightsystemdemo.passenger.mapper.PassengerMapper;
 import com.example.flightsystemdemo.passenger.repository.PassengerRepository;
-import io.micrometer.observation.ObservationFilter;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +15,7 @@ import java.util.Optional;
 public class PassengerService {
 
     private final PassengerRepository passengerRepository;
+
     private final PassengerMapper mapper;
 
 
@@ -24,7 +23,7 @@ public class PassengerService {
         return passengerRepository.findById(id).map(mapper::toDto);
     }
 
-    public Optional<PassengerResponseDto> createPassenger(@NotNull PassengerRequestDto passengerRequestDto){
+    public Optional<PassengerResponseDto> createPassenger(PassengerRequestDto passengerRequestDto){
 
         Passenger entity = mapper.toEntity(passengerRequestDto, new Passenger());
 

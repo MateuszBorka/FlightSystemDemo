@@ -7,7 +7,6 @@ import com.example.flightsystemdemo.passenger.dto.PassengerRequestDto;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,5 +23,15 @@ public class PassengerController {
         return passengerService.getPassengerById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PostMapping("passengers")
+    public ResponseEntity<?> createPassenger(@Valid @RequestBody PassengerRequestDto passengerRequestDto) {
+        final Optional<PassengerResponseDto> createPassengerResult = passengerService.createPassenger(passengerRequestDto);
+        // In more advanced system I would rather use Either<CustomError, PassengerResponseDto> to have in this CustomError class more accurate error message to be thrown to the FrontEnd.
 
+        if (!createPassengerResult.isPresent()){
+            return ResponseEntity.badRequest().build();
+        } else {
+            return ResponseEntity.ok(createPassengerResult.get());
+        }
+    }
 }
