@@ -1,4 +1,4 @@
-FROM openjdk:21-jdk-alpine
+FROM openjdk:21
 
 EXPOSE 8080
 WORKDIR /app
