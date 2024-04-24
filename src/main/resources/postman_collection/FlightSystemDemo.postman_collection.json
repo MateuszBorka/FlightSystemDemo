@@ -87,6 +87,26 @@
 					"response": []
 				},
 				{
+					"name": "Get all passengers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/passengers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passengers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete a passenger",
 					"request": {
 						"method": "DELETE",
@@ -168,7 +188,93 @@
 					"response": []
 				},
 				{
-					"name": "Get flights",
+					"name": "Get flight by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/flights/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get flights by Path",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/flights?airportId=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights"
+							],
+							"query": [
+								{
+									"key": "airportId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get flights by Date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/flights?minlDateTime=2022-04-26T15:30:00&maxDateTime=2023-04-26T16:40:00",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights"
+							],
+							"query": [
+								{
+									"key": "minlDateTime",
+									"value": "2022-04-26T15:30:00"
+								},
+								{
+									"key": "maxDateTime",
+									"value": "2023-04-26T16:40:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get flights by path Sits count",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -201,6 +307,50 @@
 							"port": "8080",
 							"path": [
 								"flights",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add passenger to flight",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/flights/1/passengers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights",
+								"1",
+								"passengers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove passenger from flight",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/flights/1/passengers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights",
+								"1",
+								"passengers",
 								"1"
 							]
 						}

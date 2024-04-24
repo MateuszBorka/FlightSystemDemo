@@ -2,15 +2,19 @@ package com.example.flightsystemdemo.flight.controller;
 
 import com.example.flightsystemdemo.flight.dto.FlightRequestDto;
 import com.example.flightsystemdemo.flight.dto.FlightResponseDto;
+import com.example.flightsystemdemo.flight.entity.Flight;
 import com.example.flightsystemdemo.flight.service.FlightService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -99,5 +103,21 @@ public class FlightController {
             return ResponseEntity.badRequest().body(errors);
         }
         return null;
+    }
+
+    @GetMapping("/flights")
+    public ResponseEntity<List<Flight>> getFlights(
+            @RequestParam(name = "airportId", required = false) Long airportId,
+            @RequestParam(name = "minDateTime", required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime minDateTime,
+            @RequestParam(name = "maxDateTime", required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime maxDateTime,
+            @RequestParam(name = "minSeats", required = false) Integer minSeats,
+            @RequestParam(name = "maxSeats", required = false) Integer maxSeats) {
+
+        // Apply logic to filter flights based on the provided parameters
+        List<Flight> filteredFlights = flightService.getFilteredFlights(airportId, minDateTime, maxDateTime, minSeats, maxSeats);
+
+        return ResponseEntity.ok(filteredFlights);
     }
 }
