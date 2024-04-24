@@ -7,6 +7,7 @@ import com.example.flightsystemdemo.flight.mapper.FlightMapper;
 import com.example.flightsystemdemo.flight.repository.FlightRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.UnaryOperator;
 
@@ -30,9 +31,14 @@ public class FlightService {
     public Optional<FlightResponseDto> createFlight(FlightRequestDto flightRequestDto) {
 
         Flight entity = mapper.toEntity(flightRequestDto, new Flight());
+        entity.setPassengers(new ArrayList<>());
 
         final Flight savedFlight = flightRepository.save(entity);
         final Optional<Flight> createdFlight = flightRepository.findById(savedFlight.getId());
+
+        if (createdFlight.get().getFlightAirports().size() < 2){
+            return Optional.empty();
+        }
 
         return createdFlight.map(mapper::toDto);
     }

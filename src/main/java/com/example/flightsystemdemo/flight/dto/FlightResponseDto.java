@@ -21,7 +21,7 @@ public class FlightResponseDto extends FlightBaseDto {
 
     private long id;
 
-    private List<Passenger> passengers ;
+    private List<Passenger> passengers;
 
     private List<Airport> flightAirports;
 }

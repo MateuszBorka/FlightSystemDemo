@@ -30,6 +30,7 @@ public class PassengerService {
 
         Passenger entity = mapper.toEntity(passengerRequestDto, new Passenger());
 
+
         final Passenger savedPassenger = passengerRepository.save(entity);
         final Optional<Passenger> createdPassenger = passengerRepository.findById(savedPassenger.getId());
 

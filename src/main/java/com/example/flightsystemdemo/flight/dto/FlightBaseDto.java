@@ -2,13 +2,12 @@ package com.example.flightsystemdemo.flight.dto;
 
 import com.example.flightsystemdemo.validation.ValidationConsts;
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDateTime;
 
@@ -19,8 +18,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class FlightBaseDto {
 
-    @Max(ValidationConsts.MAX_FREE_PLACES)
-    @Min(ValidationConsts.MIN_FREE_PLACES)
+    @Range(
+            min = ValidationConsts.MIN_FREE_PLACES,
+            max = ValidationConsts.MAX_FREE_PLACES
+    )
     private int freePlaces;
 
     @Future(message = "Departure date and time must be in the future")
