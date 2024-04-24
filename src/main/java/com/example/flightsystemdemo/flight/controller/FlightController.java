@@ -70,6 +70,26 @@ public class FlightController {
         }
     }
 
+    @PostMapping("flights/{flightId}/passengers/{passengerId}")
+    public ResponseEntity<?> addPassengerToFlight( @PathVariable long flightId, @PathVariable long passengerId){
+        Optional<FlightResponseDto> updateFlightResult = flightService.addPassenger(flightId, passengerId);
+        if (!updateFlightResult.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            return ResponseEntity.ok(updateFlightResult.get());
+        }
+    }
+
+    @DeleteMapping("flights/{flightId}/passengers/{passengerId}")
+    public ResponseEntity<?> removePassengerFromFlight( @PathVariable long flightId, @PathVariable long passengerId){
+        Optional<FlightResponseDto> updateFlightResult = flightService.removePassenger(flightId, passengerId);
+        if (!updateFlightResult.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            return ResponseEntity.ok(updateFlightResult.get());
+        }
+    }
+
     private ResponseEntity<?> getValidationResult(BindingResult result) {
         if (result.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
