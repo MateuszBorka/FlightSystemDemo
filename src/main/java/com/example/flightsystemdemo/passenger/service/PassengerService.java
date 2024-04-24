@@ -24,7 +24,7 @@ public class PassengerService {
         return passengerRepository.findById(id).map(mapper::toDto);
     }
 
-    public Optional<PassengerResponseDto> createPassenger(PassengerRequestDto passengerRequestDto){
+    public Optional<PassengerResponseDto> createPassenger(PassengerRequestDto passengerRequestDto) {
 
         Passenger entity = mapper.toEntity(passengerRequestDto, new Passenger());
 
@@ -50,8 +50,17 @@ public class PassengerService {
         return updatedPassenger.map(mapper::toDto);
 
 
+    }
 
+    public boolean deletePassenger(long passengerId) {
+        Optional<Passenger> existingPassenger = passengerRepository.findById(passengerId);
 
+        if (!existingPassenger.isPresent()) {
+            return false;
+        }
 
+        passengerRepository.deleteById(passengerId);
+
+        return true;
     }
 }
