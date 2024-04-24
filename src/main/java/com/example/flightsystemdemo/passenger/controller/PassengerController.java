@@ -72,6 +72,10 @@ public class PassengerController {
         }
     }
 
+    @GetMapping("passengers")
+    public ResponseEntity<?> getListOfAllPassengers() {
+        return ResponseEntity.ok(passengerService.getAllPassengers());
+    }
 
     private ResponseEntity<?> getValidationResult(BindingResult result) {
         if (result.hasErrors()) {
