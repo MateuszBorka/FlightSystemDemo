@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 
 @Service
 @RequiredArgsConstructor
@@ -31,5 +32,26 @@ public class PassengerService {
         final Optional<Passenger> createdPassenger = passengerRepository.findById(savedPassenger.getId());
 
         return createdPassenger.map(mapper::toDto);
+    }
+
+    public Optional<PassengerResponseDto> updatePassenger(long passengerId, PassengerRequestDto passengerRequestDto) {
+
+        final UnaryOperator<Passenger> passengerEntityMapper = existingPassenger -> mapper.toEntity(passengerRequestDto, existingPassenger);
+
+        final Optional<Passenger> existingPassengerEntity = passengerRepository.findById(passengerId);
+
+
+        final Passenger passengerToUpdate = passengerEntityMapper.apply(existingPassengerEntity.get());
+
+        passengerRepository.save(passengerToUpdate);
+
+        final Optional<Passenger> updatedPassenger = passengerRepository.findById(passengerToUpdate.getId());
+
+        return updatedPassenger.map(mapper::toDto);
+
+
+
+
+
     }
 }
