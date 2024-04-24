@@ -20,4 +20,6 @@ public class ValidationConsts {
     public static final int SIZE_CODE = 3; // IATA code system
 
 
+    public static final int MIN_FREE_PLACES = 1;
+    public static final int MAX_FREE_PLACES = 1000; // I am definitely not sure about this value, would better ask Product Owner
 }

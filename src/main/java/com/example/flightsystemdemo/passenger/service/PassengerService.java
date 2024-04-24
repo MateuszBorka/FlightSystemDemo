@@ -8,6 +8,7 @@ import com.example.flightsystemdemo.passenger.repository.PassengerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.UnaryOperator;
 
@@ -62,5 +63,9 @@ public class PassengerService {
         passengerRepository.deleteById(passengerId);
 
         return true;
+    }
+
+    public List<Passenger> findByIds(List<Long> passengerIds) {
+        return passengerRepository.findAllById(passengerIds);
     }
 }

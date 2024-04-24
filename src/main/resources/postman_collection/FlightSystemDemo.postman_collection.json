@@ -12,11 +12,11 @@
 				{
 					"name": "Update a passenger",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mateusz\",\r\n    \"surname\": \"Borka\",\r\n    \"contactPhone\": \"537210099\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Mateusz\",\r\n    \"surname\": \"Borka\",\r\n    \"contactPhone\": \"637210099\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,14 +24,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/passengers",
+							"raw": "http://localhost:8080/passengers/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"passengers"
+								"passengers",
+								"1"
 							]
 						}
 					},
@@ -88,7 +89,210 @@
 				{
 					"name": "Delete a passenger",
 					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/passengers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passengers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "flight",
+			"item": [
+				{
+					"name": "Update a flight",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mateusz\",\r\n    \"surname\": \"Borka\",\r\n    \"contactPhone\": \"537210099\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/flights",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a flight",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"freePlaces\": 150,\r\n  \"flightAirports\": [1, 2],\r\n  \"departureDateAndTime\": \"2024-05-01T12:00:00\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/flights",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get flights",
+					"request": {
 						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/passengers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passengers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a flight",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/flights/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flights",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "airport",
+			"item": [
+				{
+					"name": "Update an airport",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mateusz\",\r\n    \"surname\": \"Borka\",\r\n    \"contactPhone\": \"637210099\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/passengers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passengers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an airport",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Warsaw Chopin\",\r\n    \"code\": \"WAW\",\r\n    \"latitude\": \"52.1645\",\r\n    \"longitude\": \"20.9693\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/airports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"airports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get airport",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/passengers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"passengers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an airport",
+					"request": {
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/passengers/1",
