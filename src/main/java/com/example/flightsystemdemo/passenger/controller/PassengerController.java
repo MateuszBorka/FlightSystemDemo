@@ -6,8 +6,12 @@ import com.example.flightsystemdemo.passenger.service.PassengerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -22,7 +26,11 @@ public class PassengerController {
     }
 
     @PostMapping("passengers")
-    public ResponseEntity<?> createPassenger(@Valid @RequestBody PassengerRequestDto passengerRequestDto) {
+    public ResponseEntity<?> createPassenger(@Valid @RequestBody PassengerRequestDto passengerRequestDto, BindingResult result) {
+
+        ResponseEntity<?> errors = getValidationResult(result);
+        if (errors != null) return errors;
+
         final Optional<PassengerResponseDto> createPassengerResult = passengerService.createPassenger(passengerRequestDto);
         // In more advanced system I would rather use Either<CustomError, PassengerResponseDto> to have in this CustomError class more accurate error message to be thrown to the FrontEnd.
 
@@ -36,8 +44,13 @@ public class PassengerController {
     @PutMapping("passengers/{id}")
     public ResponseEntity<?> updatePassengerById(
             @PathVariable long id,
-            @Valid @RequestBody PassengerRequestDto passengerRequestDto
+            @Valid @RequestBody PassengerRequestDto passengerRequestDto,
+            BindingResult result
     ) {
+
+        ResponseEntity<?> errors = getValidationResult(result);
+        if (errors != null) return errors;
+
         final Optional<PassengerResponseDto> updatePassengerResult = passengerService.updatePassenger(id, passengerRequestDto);
 
         if (!updatePassengerResult.isPresent()) {
@@ -46,6 +59,7 @@ public class PassengerController {
             return ResponseEntity.ok(updatePassengerResult.get());
         }
     }
+
 
     @DeleteMapping("passengers/{id}")
     public ResponseEntity<?> deletePassengerById(@PathVariable long id) {
@@ -56,5 +70,17 @@ public class PassengerController {
         } else {
             return ResponseEntity.noContent().build();
         }
+    }
+
+
+    private ResponseEntity<?> getValidationResult(BindingResult result) {
+        if (result.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body(errors);
+        }
+        return null;
     }
 }

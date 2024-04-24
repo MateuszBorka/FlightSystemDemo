@@ -18,7 +18,11 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class PassengerBaseDto {
 
-    @Size(min = ValidationConsts.MIN_SIZE_NAME, max = ValidationConsts.MAX_SIZE_NAME)
+    @Size(
+            min = ValidationConsts.MIN_SIZE_NAME,
+            max = ValidationConsts.MAX_SIZE_NAME,
+            message = "Name length must be between {min} and {max} characters"
+    )
     @Pattern(regexp = ValidationConsts.NAME_NO_SPACES_PATTERN, message = ValidationMessages.NAME)
     @NotBlank
     private String name;
@@ -29,6 +33,15 @@ public class PassengerBaseDto {
     private String surname;
 
 
-    @Size(max = ValidationConsts.MAX_PHONE_NUMBER_LENGTH)
+    @Size(
+            min = ValidationConsts.MIN_PHONE_NUMBER_LENGTH,
+            max = ValidationConsts.MAX_PHONE_NUMBER_LENGTH,
+            message = "Phone number length must be between {min} and {max} characters"
+    )
+    @Pattern(
+            regexp = ValidationConsts.PHONE_NUMBER_ONLY_NUMBERS_PATTERN,
+            message = "Contact phone must contain only numbers"
+    )
+    @NotBlank
     private String contactPhone;
 }

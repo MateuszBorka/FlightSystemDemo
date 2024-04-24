@@ -68,4 +68,5 @@ public class PassengerService {
     public List<Passenger> findByIds(List<Long> passengerIds) {
         return passengerRepository.findAllById(passengerIds);
     }
+
 }

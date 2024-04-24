@@ -22,4 +22,7 @@ public class ValidationConsts {
 
     public static final int MIN_FREE_PLACES = 1;
     public static final int MAX_FREE_PLACES = 1000; // I am definitely not sure about this value, would better ask Product Owner
+    public static final int MIN_PHONE_NUMBER_LENGTH = 4;
+    public static final String PHONE_NUMBER_ONLY_NUMBERS_PATTERN = "\\d+";
+    public static final String IATA_CODE_PATTERN = "^[A-Z]{3}$";
 }
